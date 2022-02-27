@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <style>
+        /* List with bullets */
+.list-bullets {
+    list-style: none;
+}
+
+.list-bullets li {
+    display: flex;
+    align-items: center;
+}
+
+.list-bullets li::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #5784d7;
+    border: 2px solid #8fb3f5;
+    display: block;
+    margin-right: 1rem;
+}
+
+/* Unordered list with custom numbers style */
+ol.custom-numbers {
+    list-style: none;
+}
+
+ol.custom-numbers li {
+    counter-increment: my-awesome-counter;
+}
+
+ol.custom-numbers li::before {
+    content: counter(my-awesome-counter) ". ";
+    color: #2b90d9;
+    font-weight: bold;
+}
+
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSES
+* ==========================================
+*
+*/
+body {
+    min-height: 100vh;
+    background-color: #6190e8;
+    background-image: linear-gradient(to right, #5784d7 0%, #a7bfe8 100%);
+}
+
+li {
+    font-style: italic;
+}
+
+    </style>
+  </head>
+    <body>
+        <div class="container py-5">
+            <!-- For demo purpose -->
+            <header class="text-center text-white">
+                <h1 class="display-4">{% if ip_list %} Successfully added IP address! {% elif domain_list %} Successfully added Domains {% else %} No entries were added {% endif %}</h1>
+                <p class="lead mb-0 font-italic">Following are list of inputs for rejected items and approved items</p>
+                <a href="{% url 'index' %}">Click here to add more inputs</a>
+                
+            </header>
+        
+            <div class="row py-5">
+                <div class="col-lg-7 mx-auto">
+        
+                    <div class="card shadow mb-4">
+                        <div class="card-body p-5">
+                            <h4 class="mb-4">Rejected list</h4>
+                            <!-- Ordered list -->
+                            <ol class="custom-numbers">
+                                {% if rejecteds %}
+                                {% for item in rejecteds %}
+                                <li class="mb-2">{{item}}</li>
+                                {% endfor %}
+                                {% else %}
+                                <li class="mb-2">None</li>
+                                {% endif %}
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-body p-5">
+                            <h4 class="mb-4">Duplicate</h4>
+                            <!-- Ordered list with custom style -->
+                            <ol class="custom-numbers">
+                                {% if duplicates %}
+                                {% for item in duplicates %}
+                                <li class="mb-2">{{item}}</li>
+                                {% endfor %}
+                                {% else %}
+                                <li class="mb-2">None</li>
+                                {% endif %}
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-body p-5">
+                            <h4 class="mb-4">Approved</h4>
+                            <a href={% if filename == '1' %} "{% url 'ip_file' %}" {% else %} "{% url 'domain_file' %}" {% endif %}>open original file</a>
+                            <!-- Ordered list with custom style -->
+                            <ol class="custom-numbers">
+                            {% if filename == '1' %}
+                                {% if ip_list %}
+                                {% for ip in ip_list %}
+                                <li class="mb-2">{{ip}}</li>
+                                {% endfor %}
+                                {% endif %}
+                            {% else %}
+                                {% if domain_list %}
+                                {% for domain in domain_list %}
+                                <li class="mb-2">{{domain}}</li>
+                                {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                            </ol>
+                        </div>
+                    </div>
+        
+                    
+        
+                </div>
+            </div>
+        </div>
+        
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  
+  </body>
+  </html>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Select File to modify</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/cover/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <style>
+      body {
+    background-color: #FFEBEE
+}
+
+.card {
+    width: 700px;
+    background-color: #fff;
+    border: none;
+    border-radius: 12px
+}
+
+label.radio {
+    cursor: pointer;
+    width: 100%
+}
+
+label.radio input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    pointer-events: none
+}
+
+label.radio span {
+    padding: 7px 14px;
+    border: 2px solid #eee;
+    display: inline-block;
+    color: #039be5;
+    border-radius: 10px;
+    width: 100%;
+    height: 48px;
+    line-height: 27px
+}
+
+label.radio input:checked+span {
+    border-color: #039BE5;
+    background-color: #81D4FA;
+    color: #fff;
+    border-radius: 9px;
+    height: 48px;
+    line-height: 27px
+}
+
+.form-control {
+    margin-top: 10px;
+    height: 48px;
+    border: 2px solid #eee;
+    border-radius: 10px
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border: 2px solid #039BE5
+}
+
+.agree-text {
+    font-size: 12px
+}
+
+.terms {
+    font-size: 12px;
+    text-decoration: none;
+    color: #039BE5
+}
+
+.confirm-button {
+    height: 50px;
+    border-radius: 10px
+}
+
+    </style>
+
+  </head>
+  <body class="text-center">
+    <div class="container mt-8 mb-8 d-flex justify-content-center">
+        <div class="card px-1 py-4">
+            <div class="card-body">
+                <h6 style="text-align: left"><a href="{% url 'ip_file' %}" >Total IP: {{total_ip}} </a>&nbsp;&nbsp;&nbsp;&nbsp; 
+                    <a href="{% url 'domain_file' %}">Total Domains: {{total_domain}}</a></h6>
+                <h6 class="card-title mb-3">Select File</h6>
+                <form method="POST">
+                    {% csrf_token %}
+                <div class="d-flex flex-row"> 
+                    <label class="radio mr-1"> 
+                        {{form.myfile}} 
+                    </label> 
+                </div>
+                <h6 class="information mt-4">Enter your input here. Multiple inputs can be separated by spaces or newline.
+                </h6>
+                <div class="row flex-row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <!-- <label for="name">Name</label> --> {{form.mytext}}</div>
+                    </div>
+                </div>
+                <h6 class="inforamtion mt-4">In case of ip address, IPv4 and IPv6 are accepted and any occurence of private IP will be ignored without any feedback. If a IP address or domain is found in whitelist file, it'll be listed under "Rejected list" and if a IP or Domain already exists in the original file, it will be ignored and listed under "Duplicates".</h6>
+                <button class="btn btn-primary btn-block confirm-button">Confirm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

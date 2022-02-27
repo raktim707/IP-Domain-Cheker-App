@@ -1,0 +1,4 @@
+172.32.1.1
+www.bing.com
+172.65.1.100
+www.google.com
